@@ -1,24 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>WebSite Slicer</title>
-    <link rel="stylesheet" href="navStyle.css" />
+  <link rel="stylesheet" href="navStyle.css" />
 </head>
-<body>
-    <div class="side-menu">
-        <form>
-            <input type="search" placeholder="Search"/>
-            <button><img src="img/template/searchIcon.png"/></button>
-        </form>
-        <nav>
-            <a href="#">pattern</a>
-            <a href="#">layout</a>
-            <a href="#">mind</a>
-            <a href="#">process</a>
-            <a href="#">product</a>
-        </nav>
-    </div>
 
+<body>
+  <div class="side-menu">
+    <form>
+      <input type="search" placeholder="Search" />
+      <button>
+        <img src="img/template/searchIcon.png" />
+      </button>
+    </form>
+    <nav>
+      <a href="#">pattern</a>
+      <a href="#">layout</a>
+      <a href="#">mind</a>
+      <a href="#">process</a>
+      <a href="#">product</a>
+    </nav>
+    <div class="scroll-container">
+      <a class="scroll-content" href="#"> >> </a>
+    </div>
+  </div>
+  <script>
+    ; (function () {
+      let hiddenButton = document.querySelector(".scroll-content");
+      let sideMenu = document.querySelector(".side-menu");
+      let isMenuHidden = true;
+      console.log(hiddenButton, sideMenu);
+
+      function toggleMenuHandler() {
+        isMenuHidden = !isMenuHidden;
+        console.log(isMenuHidden);
+        hiddenButton.innerHTML = isMenuHidden ? ">>" : "<<";
+        viewModel(); //這邊之後要重構
+      }
+      function viewModel() {
+        if (isMenuHidden) {
+          sideMenu.classList.remove("active");
+        } else {
+          sideMenu.classList.add("active");
+        }
+        console.log(sideMenu.className);
+      }
+      hiddenButton.addEventListener('click', toggleMenuHandler);
+    })();
+  </script>
 </body>
+
 </html>
