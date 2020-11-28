@@ -8,7 +8,10 @@
 <body>
     <span>Type01-IconFocus:</span>
     <div class="T01">
-        <a href="#" ><img src="img/template/searchIcon.png"/></a>
+      <input type="checkbox" id="switch" />
+        <a href="#" >
+          <label for="switch"><img src="img/template/searchIcon.png"/></label>
+        </a>
         <input type="text" placeholder="Search"/>
     </div>
     <br />
@@ -30,24 +33,32 @@
         </form>
     </div>
     <script>
-        ; (function () {
-            function T01() {
-                let iconFocus = document.querySelector('.T01');
+      ; (function () {
+        
+        function testTarget(e) {
+          console.log(e.target);
+          console.log("//");
+          console.log(e.currentTarget);
+          console.log("\\");
+        }
+        window.addEventListener('click', testTarget);
+        //    function T01() {
+        //        let iconFocus = document.querySelector('.T01');
 
-                function addClassHandler() {
-                    this.classList.add('click');
-                    console.log('click');
-                }
-                function removeClassHandler() {
-                    this.classList.remove('click');
-                    console.log('leave');
-                }
+        //        function addClassHandler() {
+        //            this.classList.add('click');
+        //            console.log('click');
+        //        }
+        //        function removeClassHandler() {
+        //            this.classList.remove('click');
+        //            console.log('leave');
+        //        }
 
-                iconFocus.addEventListener('mouseup', addClassHandler);
-                iconFocus.addEventListener('focusout', removeClassHandler);
-                //目前點搜尋框內也會收合，做不出點非搜尋框的地方才會收合
-            }
-            T01();
+        //        iconFocus.addEventListener('mouseup', addClassHandler);
+        //        iconFocus.addEventListener('focusout', removeClassHandler);
+        //        //目前點搜尋框內也會收合，做不出點非搜尋框的地方才會收合
+        //    }
+        //    T01();
             
         })();
     </script>

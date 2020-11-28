@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>audio Template</title>
+    <link rel="stylesheet" href="audioStyle.css" />
+</head>
+<body>
+    <audio src="audio/test.mp3" autoplay="autoplay" controls="controls"></audio>
+    <span>Type01-audioVolumeIcon(audioHz)</span>
+    <div class="T01">
+      <div id="volumeControl"></div>
+    </div>
+    <br />
+    <div style="display:none">https://www.oxxostudio.tw/articles/201512/web-audio-api-createmediaelementsource.html</div>
+    <script>
+      ; (function () {
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        var myAudio = document.querySelector('audio');
+        var source = audioCtx.createMediaElementSource(myAudio);
+        var processor = audioCtx.createScriptProcessor(256, 1, 1);
+
+        var T01Display = document.querySelector('#volumeControl');
+        const freqVol = 128;
+        for (var i = 0; i < freqVol; i++) {
+          T01Display.innerHTML += '<div></div>';
+        }
+        let T01Vol = document.querySelectorAll('#volumeControl div');
+
+        source.connect(processor);
+        processor.connect(audioCtx.destination);
+
+        processor.onaudioprocess = function(e) {
+          var input = e.inputBuffer.getChannelData(0);
+          var output = e.outputBuffer.getChannelData(0);
+          for (var i = 0; i < input.length; i++) {
+            output[i] = input[i];
+          }
+          console.log(output);
+          console.log(processor.bufferSize);
+          for (var j = 0; j < freqVol; j++) {
+            T01Vol[j].style.height = output[j * 2/*(processor.bufferSize / freqVol)*/] * 100 + 'px';
+          }
+        };
+
+        })();
+    </script>
+
+</body>
+</html>
